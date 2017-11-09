@@ -1,0 +1,41 @@
+body{
+    -webkit-tap-highlight-color: transparent;
+}
+
+.form{
+    width: 100%;
+}
+
+.form .form-item{
+    margin-bottom: 20px;
+}
+
+.form .form-item input{
+    width: 100%;
+    height: 52px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    border: 1px solid #EEE;
+    outline: none;
+    font-size: 16px;
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+
+.form .form-item button{
+    width: 100%;
+    height: 52px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    border: 1px solid #EEE;
+    outline: none;
+    font-size: 16px;
+    background: #EEE;
+}
+
+.message{
+    height: 40px;
+    line-height: 40px;
+}
+
+

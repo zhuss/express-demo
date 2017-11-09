@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>注册</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+        <div class="form">
+            <div class="form-item">
+                <input v-model="user.name" placeholder="name" type="text"/>
+            </div>
+            <div class="form-item">
+                <input v-model="user.account" placeholder="account" type="text"/>
+            </div>
+            <div class="form-item">
+                <input v-model="user.password" placeholder="password" type="password"/>
+            </div>
+            
+            <div class="form-item">
+                <button @click="regBtnClick">注册</button>
+            </div>
+        </div>
+    </div>
+    <script src="../javascripts/vue.min.js"></script>
+    <script src="../javascripts/axios.min.js"></script>
+    <script>
+        var vue = new Vue({
+            el:"#app",
+            data:{
+                message:"Hello",
+                user:{
+                    account:"",
+                    password:"",
+                    name:""
+                }
+            },
+            methods:{
+                regBtnClick(){
+                    axios.post("/users/register",{
+                        account:this.user.account,
+                        password:this.user.password,
+                        name:this.user.name
+                    }).then(res => {
+                        if(res.data.code == 200){
+                            this.message = "注册成功";
+                        }else{
+                            this.message = res.data.message;
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <title>index</title>
+        <link rel="stylesheet" href="../stylesheets/index.css">
+        <style>
+        body{
+            padding: 18px;
+            margin: 0;
+            text-align: justify;
+            word-wrap:break-word;
+            font-size: 14px;
+        }
+        p{
+            padding: 0;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        table td,table th{
+         border: 1px solid #ccc;
+        }
+        table th{
+         text-align: center;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <p><%- data %></p>
+            <p>{{message}}</p>
+            <div class="form">
+                <div class="form-item">
+                    <input v-model="user.account" type="text">
+                </div>
+                <div class="form-item">
+                    <input v-model="user.password" type="password">
+                </div>
+                <div class="form-item">
+                    <button @click="loginBtnClick">登录</button>
+                </div>
+            </div>
+            
+        </div>
+        <script src="../javascripts/vue.min.js"></script>
+        <script src="../javascripts/axios.min.js"></script>
+        <script>
+            var vue = new Vue({
+                el:"#app",
+                data:{
+                    message:"Hello",
+                    user:{
+                        account:"",
+                        password:""
+                    }
+                },
+                methods:{
+                    loginBtnClick(){
+                        axios.post("/users/login",{
+                            account:this.user.account,
+                            password:this.user.password
+                        }).then(res => {
+                            if(res.data.code == 200){
+                                this.message = "登录成功";
+                            }else{
+                                this.message = res.data.message;
+                            }
+                        });
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
